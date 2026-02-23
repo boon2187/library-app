@@ -10,7 +10,7 @@ export class BookController {
 
   async add(req: Request, res: Response): Promise<void> {
     try {
-      const title = req.body as string;
+      const title = req.body.title as string;
       const book = await this.bookService.add(title);
       res.status(201).json(book);
     } catch (error) {
