@@ -1,8 +1,7 @@
 import { PrismaClient, type Book } from "@prisma/client";
-// import type { Book } from "@prisma/client";
-// import { PrismaClient, Book } from '../generated/prisma';
+import type { BookRepositoryInterface } from "./bookRepositoryInterface.js";
 
-export class PrismaBookRepository {
+export class PrismaBookRepository implements BookRepositoryInterface {
   private prisma: PrismaClient;
 
   constructor() {
