@@ -2,12 +2,16 @@ console.log("DATABASE_URL:", process.env.DATABASE_URL);
 import "dotenv/config";
 import express from "express";
 import { BookController } from "./presentation/bookController.js";
+import { PrismaBookRepository } from "./dataAccess/prismaBookRepository.js";
+import { BookService } from "./buisinessLogic/bookService.js";
 
 const app = express();
 
 app.use(express.json());
 
-const bookController = new BookController();
+const bookRepository = new PrismaBookRepository();
+const bookService = new BookService(bookRepository);
+const bookController = new BookController(bookService);
 
 const PORT = process.env.PORT || 3000;
 
