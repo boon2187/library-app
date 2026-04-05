@@ -1,6 +1,6 @@
-import type { Book } from "@prisma/client";
-import type { BookRepositoryInterface } from "../dataAccess/bookRepositoryInterface.js";
-import type { BookServiceInterface } from "./bookServiceInterface.js";
+import type { Book } from '@prisma/client';
+import type { BookRepositoryInterface } from '../dataAccess/bookRepositoryInterface.js';
+import type { BookServiceInterface } from './bookServiceInterface.js';
 
 export class BookService implements BookServiceInterface {
   constructor(private readonly bookRepository: BookRepositoryInterface) {}
