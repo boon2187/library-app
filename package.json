@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch -r dotenv/config src/app.ts",
+    "dev": "tsx watch -r dotenv/config src/infrastructure/web/app.ts",
     "test": "jest"
   },
   "keywords": [],
