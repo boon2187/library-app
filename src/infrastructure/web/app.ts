@@ -8,6 +8,7 @@ import { AddBookUseCase } from '../../application/usecases/book/addBookUseCase.j
 import { BookController } from '../../adapter/contorollers/bookController.js';
 import { bookRoutes } from './routers/bookRouter.js';
 import { FindBookByIdUseCase } from '../../application/usecases/book/findBookByIdUseCase.js';
+import { FindAllBooksUseCase } from '../../application/usecases/book/findAllBooksUseCase.js';
 
 const app = express();
 
@@ -19,8 +20,13 @@ const uuidGenerator = new UuidGenerator();
 const bookRepository = new PrismaBookRepository(prisma);
 const addBookUseCase = new AddBookUseCase(bookRepository, uuidGenerator);
 const findBookByIdUseCase = new FindBookByIdUseCase(bookRepository);
+const findAllBooksUseCase = new FindAllBooksUseCase(bookRepository);
 
-const bookController = new BookController(addBookUseCase, findBookByIdUseCase);
+const bookController = new BookController(
+  addBookUseCase,
+  findBookByIdUseCase,
+  findAllBooksUseCase,
+);
 
 app.use('/books', bookRoutes(bookController));
 

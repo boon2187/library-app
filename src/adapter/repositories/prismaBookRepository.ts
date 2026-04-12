@@ -24,6 +24,20 @@ export class PrismaBookRepository implements BookRepositoryInterface {
     );
   }
 
+  async findAll(): Promise<Book[]> {
+    const books = await this.prisma.book.findMany();
+    return books.map(
+      (book) =>
+        new Book(
+          book.id,
+          book.title,
+          book.isAvailable,
+          book.createdAt,
+          book.updatedAt,
+        ),
+    );
+  }
+
   async findById(id: string): Promise<Book | null> {
     const book = await this.prisma.book.findUnique({
       where: { id },

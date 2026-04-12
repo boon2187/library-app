@@ -3,11 +3,13 @@ import type { AddBookUseCase } from '../../application/usecases/book/addBookUseC
 import type { AddBookRequestDto } from '../../application/dtos/book/addBookRequestDto.js';
 import type { FindBookByIdUseCase } from '../../application/usecases/book/findBookByIdUseCase.js';
 import type { FindBookByIdRequestDto } from '../../application/dtos/book/findBookByIdRequestDto.js';
+import type { FindAllBooksUseCase } from '../../application/usecases/book/findAllBooksUseCase.js';
 
 export class BookController {
   constructor(
     private readonly addBookUseCase: AddBookUseCase,
     private readonly findBookByIdUseCase: FindBookByIdUseCase,
+    private readonly findAllBooksUseCase: FindAllBooksUseCase,
   ) {}
 
   async add(req: Request, res: Response): Promise<void> {
@@ -21,6 +23,16 @@ export class BookController {
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: '書籍の登録に失敗しました' });
+    }
+  }
+
+  async findAll(_req: Request, res: Response): Promise<void> {
+    try {
+      const books = await this.findAllBooksUseCase.execute();
+      res.status(200).json(books);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: '書籍の一覧取得に失敗しました' });
     }
   }
 
